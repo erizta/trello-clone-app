@@ -41,6 +41,7 @@ export const getTodosGroupedByColumn = async () => {
 
   console.log(columns);
 
+  // sort columns
   const sortedColumns = new Map(
     Array.from(columns.entries()).sort(
       (a, b) => columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0])

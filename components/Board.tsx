@@ -4,7 +4,11 @@ import { useBoardStore } from "@/store/BoardStore";
 import { useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 const Board = () => {
-  const getBoard = useBoardStore((state) => state.getBoard);
+  const [board, getBoard] = useBoardStore((state) => [
+    state.board,
+    state.getBoard,
+  ]);
+  // const board = useBoardStore((state) => state.board);
 
   useEffect(() => {
     getBoard();

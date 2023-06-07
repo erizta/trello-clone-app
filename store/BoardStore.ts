@@ -2,12 +2,12 @@ import { getTodosGroupedByColumn } from "@/lib/getTodosGroupedByColumn";
 import { create } from "zustand";
 
 interface BoardState {
-  bears: Board;
+  board: Board;
   getBoard: () => void;
 }
 
 export const useBoardStore = create<BoardState>((set) => ({
-  bears: {
+  board: {
     columns: new Map<TypedColumn, Column>(),
   },
   getBoard: async () => {
