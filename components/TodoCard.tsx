@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import { DraggableProvidedDraggableProps } from "react-beautiful-dnd";
+import { DraggableProvidedDragHandleProps, DraggableProvidedDraggableProps } from "react-beautiful-dnd";
 
 type TodoCardProps = {
   todo: Todo;
@@ -9,7 +11,7 @@ type TodoCardProps = {
   id: TypedColumn;
   innerRef: (element: HTMLElement | null) => void;
   draggableProps: DraggableProvidedDraggableProps;
-  dragHandleProps: DraggableProvidedDraggableProps | null | undefined;
+  dragHandleProps: DraggableProvidedDragHandleProps | null | undefined;
 };
 
 const TodoCard = ({

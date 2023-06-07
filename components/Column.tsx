@@ -17,22 +17,22 @@ const idToColumnText: {
   done: "Done",
 };
 
-const Column = ({ id, todos, index }: ColumnProps) => {
+function Column({ id, todos, index }: ColumnProps) {
   return (
     <Draggable draggableId={id} index={index}>
-      {(snapshot) => (
+      {(provided) => (
         <div
-          {...snapshot.draggableProps}
-          {...snapshot.dragHandleProps}
-          ref={snapshot.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
         >
           <Droppable droppableId={index.toString()} type="card">
-            {(snapshot, provided) => (
+            {(provided, snapshot) => (
               <div
-                {...snapshot.droppableProps}
-                ref={snapshot.innerRef}
+                {...provided.droppableProps}
+                ref={provided.innerRef}
                 className={`p-2 rounded-2xl shadow-sm ${
-                  provided.isDraggingOver ? "bg-green-200" : "bg-white/50"
+                  snapshot.isDraggingOver ? "bg-green-200" : "bg-white/50"
                 }`}
               >
                 <h2 className="flex justify-between p-2 text-xl font-bold">
@@ -43,32 +43,30 @@ const Column = ({ id, todos, index }: ColumnProps) => {
                 </h2>
 
                 <div className="space-y-2">
-                  {todos.map((todo, iDx) => (
+                  {todos.map((todo, index) => (
                     <Draggable
                       key={todo.$id}
                       draggableId={todo.$id}
                       index={index}
                     >
-                      {(snapshot) => (
+                      {(provided) => (
                         <TodoCard
                           todo={todo}
                           index={index}
                           id={id}
-                          innerRef={snapshot.innerRef}
-                          draggableProps={snapshot.draggableProps}
-                          dragHandleProps={snapshot.dragHandleProps}
+                          innerRef={provided.innerRef}
+                          draggableProps={provided.draggableProps}
+                          dragHandleProps={provided.dragHandleProps}
                         />
                       )}
                     </Draggable>
                   ))}
 
-                  {snapshot.placeholder}
+                  {provided.placeholder}
 
                   <div className="flex items-end justify-end p-2">
                     <button className="text-green-500 hover:text-green-600">
-                      <PlusCircleIcon
-                      className="w-10 h-10"
-                      />
+                      <PlusCircleIcon className="w-10 h-10" />
                     </button>
                   </div>
                 </div>
@@ -79,6 +77,6 @@ const Column = ({ id, todos, index }: ColumnProps) => {
       )}
     </Draggable>
   );
-};
+}
 
 export default Column;
