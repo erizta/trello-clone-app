@@ -23,5 +23,23 @@ export const getTodosGroupedByColumn = async () => {
       status: todo.status,
       ...(todo.image && { image: todo.image }),
     });
+
+    return acc;
   }, new Map<TypedColumn, Column>());
+
+ 
+  // empty todos
+
+  const columnTypes: TypedColumn[] = ["todo", "inprogress", "done"];
+  for (const columnType of columnTypes) {
+    if (!columns.get(columnType)) {
+      columns.set(columnType, {
+        id: columnType,
+        todos: [],
+      });
+    }
+  }
+
+  console.log(columns);
+
 };
